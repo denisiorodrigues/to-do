@@ -1,38 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import styles from './App.module.css';
+import { ChangeEvent, FormEvent, useState } from 'react'
+import {v4 as uuidV4 } from 'uuid'
+import { Header } from './components/Header'
+import style from './App.module.css'
 
 import './global.css'
-import { Header } from './components/Header';
+import { Task } from './models/Task'
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [tasks, setTasks] = useState(Array<Task>);
+
+  const [title, setTitle] = useState('');
+  const [count, setCount] = useState(0);
+
+  function handleCreateNewTask(event : FormEvent) {
+    event.preventDefault();
+    const task = new Task(title);
+    setTasks([...tasks, task]);
+    setTitle('');
+    setCount(count+1);
+
+    console.log(tasks);
+  }
+
+  function handleNewTitleChange(event : ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity('');
+    setTitle(event.target.value);
+  }
+
+  var isNewtaskEmpty = title.length === 0;
 
   return (
-    <Header/>
-    <div className="App">
+    <div>
+      <Header/>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <form onSubmit={handleCreateNewTask}>
+          <input 
+            type="text"
+            placeholder='Adicione uma nova tarefa'
+            onChange={handleNewTitleChange}
+            value={title}
+          />
+
+          <button  type='submit' disabled={isNewtaskEmpty}> Criar </button>
+        </form>
+        {tasks.map( task => {
+          return (
+            <span>
+              <div> { task.title  } </div>
+            </span>
+          )
+        })}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
-
-export default App

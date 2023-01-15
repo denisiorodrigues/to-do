@@ -13,12 +13,12 @@
   --blue: #4EA8DE;
   --blue-dark: #1E6F9F;
 }
-
+ 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} 
 
 body {
   background-color: #454545;
