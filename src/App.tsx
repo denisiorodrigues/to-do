@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+import styles from './App.module.css';
+
+import './global.css'
+import { Header } from './components/Header';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <Header/>
     <div className="App">
       <div>
         <a href="https://vitejs.dev" target="_blank">
