@@ -11,6 +11,7 @@ export function App() {
   const [tasks, setTasks] = useState(Array<Task>);
   const [title, setTitle] = useState('');
   const [total, setTotal] = useState(0);
+  const [countComplete, setCountComplete] = useState(0);
 
   function handleCreateNewTask(event : FormEvent) {
     event.preventDefault();
@@ -25,11 +26,6 @@ export function App() {
     setTitle(event.target.value);
   }
 
-  function getCompletetasks(){
-    const completeTasks = tasks.filter((task) => { task.isComplete === true });
-    return completeTasks.length;
-  }
-
   function deleteTask(id: string){
     
     const tasksWithoutDeleteOne =  tasks.filter(task => {
@@ -38,15 +34,28 @@ export function App() {
 
     setTasks(tasksWithoutDeleteOne);
     setTotal((state) => { return state - 1});
+    
   }
 
   //Essa lógica eu pesquisei na internet
   function completeTask(id: string) {
     let newTasks = tasks.map(task => {
-      return task.id === id ? {... task, isComplete: !task.isComplete } : {...task}
+      return task.id === id ? {... task, isComplete: toogleCompleteTask(task.isComplete) } : {...task}
     })
 
     setTasks(newTasks);
+  }
+
+  function toogleCompleteTask(isComplete: boolean){
+    if(isComplete) {
+      setCountComplete((result) => { return result - 1});
+      return false;
+    } 
+    else 
+    {
+      setCountComplete((result) => { return result + 1});
+      return true;
+    }
   }
 
   var isNewtaskEmpty = title.length === 0;
@@ -70,7 +79,7 @@ export function App() {
             Tarefas Criadas { total }
           </span>
           <span> 
-            Concluídas  <b>{ getCompletetasks() } de { total } </b>
+            Concluídas  <b>{ countComplete } de { total } </b>
           </span>
         </div>
         {tasks.map( task => {
