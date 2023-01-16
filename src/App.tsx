@@ -28,7 +28,15 @@ export function App() {
 
   function deleteTask(id: string){
     
-    const tasksWithoutDeleteOne =  tasks.filter(task => {
+    const taskDeleted =  tasks.find(task => {
+      return task.id === id;
+    });
+
+    if(taskDeleted?.isComplete){
+      setCountComplete((result) => { return result - 1});
+    }
+
+    var tasksWithoutDeleteOne = tasks.filter(task => {
       return task.id !== id;
     });
 
