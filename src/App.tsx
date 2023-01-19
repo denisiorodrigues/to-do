@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import {v4 as uuidV4 } from 'uuid'
 import { Header } from './components/Header'
 import style from './App.module.css'
 
@@ -21,7 +20,7 @@ export function App() {
     setTotal((state) => { return state + 1});
   }
 
-  function handleNewTitleChange(event : ChangeEvent<HTMLTextAreaElement>) {
+  function handleNewTitleChange(event : ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('');
     setTitle(event.target.value);
   }
@@ -71,7 +70,7 @@ export function App() {
   return (
     <div>
       <Header/>
-      <div>
+      <div className={style.newtask}>
         <form onSubmit={handleCreateNewTask}>
           <input 
             type="text"
@@ -82,12 +81,19 @@ export function App() {
 
           <button  type='submit' disabled={isNewtaskEmpty}> Criar </button>
         </form>
-        <div>
-          <span>
-            Tarefas Criadas { total }
+      </div>
+        
+      <div className={style.task}>  
+        <div className={style.info}>
+          <span className={style.created}>
+            <div className={style.counted }>{ total }</div> 
+            <div className={style.tarefascriada}>Tarefas Criadas</div> 
           </span>
-          <span> 
-            Concluídas  <b>{ countComplete } de { total } </b>
+          <span className={style.done}>
+            <div className={style.concluidas}>
+              Concluídas
+            </div>
+            <b className={style.counter}>{ countComplete } de { total } </b>
           </span>
         </div>
         {tasks.map( task => {
