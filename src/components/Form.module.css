@@ -1,0 +1,52 @@
+
+
+.newtask {
+    display: inline;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+
+    position: absolute;
+    width: 736px;
+    height: 54px;
+    left: calc(50% - 736px/2);
+    display: inline;
+    top: 142px;
+}
+
+.newtask input {
+    box-sizing: border-box;
+    padding: 16px;
+    width: 638px;
+    height: 54px;
+    background: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+    margin-right: 8px;
+    display: inline;
+}
+
+.newtask button {
+    padding: 16px;
+    gap: 8px;
+    width: 90px;
+    height: 52px;
+    background: var(--blue-dark);
+    font-style: bold ;
+    color: var(--gray-100);
+    cursor: pointer;
+    border: 0;
+    border-radius: 8px;
+    /*O conteúdo ficar na mesma linha*/
+    display: inline;
+    align-items: center;
+}
+
+.newtask button svg{
+  margin-right: 0.5rem;
+}
+
+.newtask button:hover{
+  background: var(--blue); 
+}

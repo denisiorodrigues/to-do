@@ -19,15 +19,15 @@ export function Tasks({ task, onDeleteTask, onCompleteTask } : TaskasProps){
     }
 
     return (
-        <div>
+        <div className={style.task}>
             <input 
                 type="checkbox" 
                 checked={task.isComplete}
                 onChange={handleIsCompleteTask}
             />
-            <div className={task.isComplete ? style.strike : ""}> 
+            <p className={task.isComplete ? style.strike : ""}> 
                 { task.title } 
-            </div>
+            </p>
             
             <button onClick={hadleDeleteTask} title='Deletar comentário'>
                 <Trash size={24} />

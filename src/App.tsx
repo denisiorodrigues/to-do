@@ -5,6 +5,7 @@ import style from './App.module.css'
 import './global.css'
 import { Task } from './models/Task'
 import { Tasks } from './components/Tasks'
+import { Form } from './components/Form'
 
 export function App() {
   const [tasks, setTasks] = useState(Array<Task>);
@@ -70,24 +71,18 @@ export function App() {
   return (
     <div>
       <Header/>
-      <div className={style.newtask}>
-        <form onSubmit={handleCreateNewTask}>
-          <input 
-            type="text"
-            placeholder='Adicione uma nova tarefa'
-            onChange={handleNewTitleChange}
-            value={title}
-          />
-
-          <button  type='submit' disabled={isNewtaskEmpty}> Criar </button>
-        </form>
-      </div>
+      <Form 
+        title = {title}
+        disableButton = {isNewtaskEmpty}
+        onCreateNewTask = {handleCreateNewTask}
+        onNewTitleChange = {handleNewTitleChange}
+      />
         
       <div className={style.task}>  
         <div className={style.info}>
           <span className={style.created}>
-            <div className={style.counted }>{ total }</div> 
             <div className={style.tarefascriada}>Tarefas Criadas</div> 
+            <div className={style.counted }>{ total }</div> 
           </span>
           <span className={style.done}>
             <div className={style.concluidas}>
@@ -96,6 +91,7 @@ export function App() {
             <b className={style.counter}>{ countComplete } de { total } </b>
           </span>
         </div>
+
         {tasks.map( task => {
           return <Tasks
                     key={task.id}
@@ -106,5 +102,5 @@ export function App() {
         })}
       </div>
     </div>
-  )
+  ) 
 }
